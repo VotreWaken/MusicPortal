@@ -10,7 +10,6 @@ namespace MusicPortal.Models.SongsModels
 		public int UserId { get; set; }
 		public int ImageId { get; set; }
 		public User User { get; set; }
-
 		public List<int> SelectedGenres { get; set; }
 	}
 }

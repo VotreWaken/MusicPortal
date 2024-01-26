@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicPortal.Models;
 using MusicPortal.Repository.AccountRepository;
 using MusicPortal.Repository.GenreRepository;
+using MusicPortal.Repository.HomeRepository;
 using MusicPortal.Repository.SongsRepository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<UserContext>(options =>
 builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ISongRepository, SongRepository>();
+builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 
 builder.Services.AddControllersWithViews();
 

@@ -37,7 +37,6 @@ namespace MusicPortal.Controllers
 
 			if (genres == null)
 			{
-				// обработка случая, когда жанры не были получены
 				return NotFound();
 			}
 
@@ -58,14 +57,12 @@ namespace MusicPortal.Controllers
 
 			if (Path != null)
 			{
-				// Сохранение файла на сервере
 				string audioPath = "/audio/" + Path.FileName;
 				using (FileStream filestream = new FileStream(_appEnvironment.WebRootPath + audioPath, FileMode.Create))
 				{
 					await Path.CopyToAsync(filestream);
 				}
 
-				// Присваивание пути к файлу аудио модели
 				model.Path = audioPath;
 			}
 
@@ -77,7 +74,6 @@ namespace MusicPortal.Controllers
 
 			var imageId = await _repository.SaveImagePath(path);
 
-			// Создание объекта Song из модели
 			var song = new AudioPath
 			{
 				Name = model.Name,
@@ -86,7 +82,6 @@ namespace MusicPortal.Controllers
 				Path = model.Path
 			};
 
-			// Добавление песни в базу данных
 			await _repository.AddSong(song);
 
 

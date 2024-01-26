@@ -32,16 +32,23 @@
                         <li><img src="~/src/img/Home.svg" alt=""><a href="/">Home</a></img></li>
                         <li><img src="~/src/img/Search.svg" alt=""><a href="search.html">Search</a></img></li>
                         <li><img src="~/src/img/YourLibrary.svg" alt=""><a href="/">Your Library</a></img></li>
-                        <li><img src="~/src/img/YourLibrary.svg" alt=""><a asp-controller="Songs" asp-action="Create">Add Audio</a></img></li>
-                        <li><img src="~/src/img/YourLibrary.svg" alt=""><a asp-controller="Genres" asp-action="Index">Add Genre</a></img></li>
+                        @if (Context.Session.GetString("Login") != null)
+                        {
+                            <li><a href="/Songs/Create"><img src="~/src/img/YourLibrary.svg" alt="">Add Audio</a></li>
+                            <li><a href="/Genres/Index"><img src="~/src/img/YourLibrary.svg" alt="">Add Genre</a></li>
+                        }
+                        else
+                        {
+                            
+                        }
                     </ul>
 
                     <!-- Left Bar Middle Options -->
                     <ul class="LeftBar-Middle-Options">
                         <li class="MiddleOption">
-                            <h2>Создайте свой первый плейлист</h2>
-                            <h3>Это совсем не сложно мы поможем</h3>
-                            <button>Создать плейлист</button>
+                            <h2>Create First Playlist</h2>
+                            <h3>It's not difficult at all, we will help</h3>
+                            <button>Create</button>
                         </li>
                     </ul>
 
@@ -57,27 +64,27 @@
                         <div class="song-elementPlaylist" draggable="false">
                             <div class="elementPlaylist-item">
                                 <img class="song-image" draggable="false" src="src/img/ContentSide/Album.png" alt="">
-                                <h1 class="song-title">Weekly Motivation</h1>
+                                <h1 class="song-title">Playlist 1</h1>
                             </div>
 
                             <div class="elementPlaylist-item">
                                 <img class="song-image" draggable="false" src="src/img/ContentSide/Album.png" alt="">
-                                <h1 class="song-title">Weekly Motivation</h1>
+                                <h1 class="song-title">Playlist 2</h1>
                             </div>
 
                             <div class="elementPlaylist-item">
                                 <img class="song-image" draggable="false" src="src/img/ContentSide/Album.png" alt="">
-                                <h1 class="song-title">Weekly Motivation</h1>
+                                <h1 class="song-title">Playlist 3</h1>
                             </div>
 
                             <div class="elementPlaylist-item">
                                 <img class="song-image" draggable="false" src="src/img/ContentSide/Album.png" alt="">
-                                <h1 class="song-title">Weekly Motivation</h1>
+                                <h1 class="song-title">Playlist 4</h1>
                             </div>
 
                             <div class="elementPlaylist-item">
                                 <img class="song-image" draggable="false" src="src/img/ContentSide/Album.png" alt="">
-                                <h1 class="song-title">Weekly Motivation</h1>
+                                <h1 class="song-title">Playlist 5</h1>
                             </div>
                         </div>
 
@@ -145,7 +152,7 @@
 
             <!-- Playlist Left Side -->
             <div class="playList-LeftSide">
-                <img class="playList-LeftSide-Image" src="src/img/DownSidePlaylist/AlbumImage.png" alt="">
+                <img class="playList-LeftSide-Image" alt="Image">
                 <div class="playList-LeftSide-Content">
                     <div class="playList-LeftSide-Title">Dreaming On</div>
                     <div class="playList-LeftSide-Writers">NEFFEX</div>
