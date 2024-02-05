@@ -152,28 +152,33 @@
 
             <!-- Playlist Left Side -->
             <div class="playList-LeftSide">
-                <img class="playList-LeftSide-Image" alt="Image">
+                <img id="current-song-image" class="playList-LeftSide-Image" alt="Image">
                 <div class="playList-LeftSide-Content">
-                    <div class="playList-LeftSide-Title">Dreaming On</div>
+                    <div id="current-song-title" class="playList-LeftSide-Title">Dreaming On</div>
                     <div class="playList-LeftSide-Writers">NEFFEX</div>
                 </div>
                 <img src="src/img/DownSidePlaylist/Favorite.svg" alt="">
             </div>
 
+            <!-- Аудио Тег -->
+            <audio id="main-audio-player" class="audio-player" controls>
+                <source src="" type="audio/mp3">
+            </audio>
+
             <!-- Playlist Middle Side -->
             <div class="playList-MiddleSide">
                 <div class="songEditSide">
                     <img src="src/img/DownSidePlaylist/RandomSongs.svg" alt="">
-                    <img src="src/img/DownSidePlaylist/PreviousSong.svg" alt="">
-                    <img src="src/img/DownSidePlaylist/StartPauseSong.svg" alt="">
-                    <img src="src/img/DownSidePlaylist/NextSong.svg" alt="">
+                    <img src="src/img/DownSidePlaylist/PreviousSong.svg" alt="" onclick="previousSong()">
+                    <img src="src/img/DownSidePlaylist/StartPauseSong.svg" alt="" onclick="togglePlayPause()">
+                    <img src="src/img/DownSidePlaylist/NextSong.svg" alt="" onclick="nextSong()">
                     <img src="src/img/DownSidePlaylist/RepeatSong.svg" alt="">
                 </div>
 
                 <div class="songDuration">
-                    <p>2:11</p>
-                    <img src="src/img/DownSidePlaylist/SongDuration.svg" alt="">
-                    <p>2:42</p>
+                    <p id="currentTime">0:00</p>
+                    <input type="range" id="seekSlider" min="0" step="1" value="0" onchange="seekSong()">
+                    <p id="totalTime">0:00</p>
                 </div>
             </div>
 
@@ -183,7 +188,6 @@
                 <img src="src/img/DownSidePlaylist/RightSide/SoundHandlerDuration.svg" alt="">
                 <img src="src/img/DownSidePlaylist/RightSide/FullScrean.svg" alt="">
             </div>
-
         </div>
 
         <!-- Модальное окно 1 -->
@@ -236,3 +240,82 @@
 
 </body>
 </html>
+<script>
+
+    var audioPlayer = document.getElementById('main-audio-player');
+    var seekSlider = document.getElementById('seekSlider');
+    var currentTimeDisplay = document.getElementById('currentTime');
+    var totalTimeDisplay = document.getElementById('totalTime');
+
+    function togglePlayPause() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+        } else {
+            audioPlayer.pause();
+        }
+    }
+
+    function previousSong() {
+        // Implement logic to play the previous song
+    }
+
+    function nextSong() {
+        // Implement logic to play the next song
+    }
+
+    function seekSong() {
+        var seekTime = audioPlayer.duration * (seekSlider.value / 100);
+        audioPlayer.currentTime = seekTime;
+    }
+
+    audioPlayer.addEventListener('timeupdate', function () {
+        var currentTime = audioPlayer.currentTime;
+        var duration = audioPlayer.duration;
+
+        var minutes = Math.floor(currentTime / 60);
+        var seconds = Math.floor(currentTime % 60);
+        currentTimeDisplay.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+        minutes = Math.floor(duration / 60);
+        seconds = Math.floor(duration % 60);
+        totalTimeDisplay.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+        seekSlider.value = (currentTime / duration) * 100;
+    });
+
+
+    // Получить Аудио при нажатии на элемент 
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Получите основной аудио-плеер
+        var mainAudioPlayer = document.getElementById('main-audio-player');
+
+        mainAudioPlayer.style.display = 'none';
+
+        var currentSongTitle = document.getElementById('current-song-title');
+        var currentSongImage = document.getElementById('current-song-image');
+
+        // Получите все элементы song-element
+        var songElements = document.querySelectorAll('.song-element');
+
+        // Добавьте обработчик события клика к каждому элементу song-element
+        songElements.forEach(function (songElement) {
+            songElement.addEventListener('click', function () {
+                // Получите источник аудио из атрибута data
+                var audioSrc = songElement.getAttribute('data-audio-src');
+                var songTitle = songElement.querySelector('.song-title').textContent;
+                var songImage = songElement.querySelector('.song-image').getAttribute('src');
+
+                // Обновите источник основного аудио-плеера и начните воспроизведение
+                mainAudioPlayer.src = audioSrc;
+                mainAudioPlayer.play();
+
+                currentSongTitle.textContent = songTitle;
+                currentSongImage.setAttribute('src', songImage);
+
+                currentSongTitle.style.display = 'block';
+                currentSongImage.style.display = 'block';
+            });
+        });
+    });
+</script>

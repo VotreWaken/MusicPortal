@@ -327,13 +327,21 @@ section {
     align-items: center;
 }
 
+#current-song-image {
+    width: 60px;
+    height: 60px;
+}
 
 /* DownSide Playlist Middle */
-
 .playList-MiddleSide {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 600px;
+}
+
+#seekSlider {
+    width: 600px;
 }
 
 .songEditSide {
@@ -365,4 +373,21 @@ section {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+
+/* Create Song */
+
+#SelectGenresGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#genreSelect {
+    width: 200px;
+}
+
+#genreSelect option {
+    text-align: center;
 }
