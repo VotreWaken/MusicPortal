@@ -78,6 +78,7 @@ ul li a {
 
 ul li img {
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 ul li:hover {
@@ -272,6 +273,11 @@ section {
     margin-bottom: 20px;
 }
 
+.song-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}
 .song-element:hover {
     cursor: pointer;
     .song-image

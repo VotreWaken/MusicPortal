@@ -16,7 +16,7 @@
                 @foreach (var song in genreModel.Songs)
                 {
                     <div class="song-element">
-                        <img class="song-image" src="@song.ImageId" alt="">
+                        <img class="song-image" src="@genreModel.ImagePaths.ElementAtOrDefault(genreModel.Songs.ToList().IndexOf(song))" alt="">
                         <h1 class="song-title">@song.Name</h1>
                         @if (song.User != null)
                         {
@@ -26,9 +26,31 @@
                         {
                             <h2 class="song-writer">Unknown Writer</h2>
                         }
+                        <audio class="audio-player" controls>
+                            <source src="@song.Path" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
                     </div>
                 }
             </div>
         }
     </div>
+
 </section>
+
+<script>
+    // Получите все элементы audio
+    var audioPlayers = document.querySelectorAll('.audio-player');
+
+    // Добавьте обработчик события для каждого элемента audio
+    audioPlayers.forEach(function (player) {
+        player.addEventListener('play', function () {
+            // Поставьте на паузу все другие аудиоэлементы
+            audioPlayers.forEach(function (otherPlayer) {
+                if (otherPlayer !== player) {
+                    otherPlayer.pause();
+                }
+            });
+        });
+    });
+</script>

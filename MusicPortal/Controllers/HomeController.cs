@@ -36,25 +36,24 @@ namespace MusicPortal.Controllers
         public async Task<IActionResult> Index()
         {
             var genres = await _repository.GetGenres();
-
-
             var genreSongs = new List<HomeAudioGenreModel>();
-
 
             foreach (var genre in genres)
             {
                 var songs = await _homeRepository.GetSongsByGenreAsync(genre.GenreName);
 
+                var imagePaths = await _homeRepository.GetImagePathsForSongsAsync(songs.Select(song => song.ImageId));
 
                 var genreSongModel = new HomeAudioGenreModel
                 {
                     Genre = genre,
-                    Songs = songs
+                    Songs = songs,
+                    ImagePaths = imagePaths
                 };
                 genreSongs.Add(genreSongModel);
             }
-            var viewModel = new List<HomeAudioGenreModel>(genreSongs);
 
+            var viewModel = new List<HomeAudioGenreModel>(genreSongs);
             return View(viewModel);
         }
 

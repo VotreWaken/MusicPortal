@@ -18,6 +18,16 @@ namespace MusicPortal.Repository.HomeRepository
             return await _context.AudioGenre.ToListAsync();
         }
 
+        public async Task<IEnumerable<string>> GetImagePathsForSongsAsync(IEnumerable<int> imageIds)
+        {
+            var imagePaths = await _context.ImagePath
+                                            .Where(image => imageIds.Contains(image.Id))
+                                            .Select(image => image.Path)
+                                            .ToListAsync();
+
+            return imagePaths;
+        }
+
         public async Task<IEnumerable<AudioPath>> GetSongsByGenreAsync(string genreName)
         {
             return await _context.AudioGenre

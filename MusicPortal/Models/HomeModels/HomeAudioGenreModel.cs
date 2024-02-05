@@ -7,5 +7,6 @@ namespace MusicPortal.Models.HomeModels
     {
         public Genre Genre { get; set; }
         public IEnumerable<AudioPath> Songs { get; set; }
+        public IEnumerable<string> ImagePaths { get; set; }
     }
 }

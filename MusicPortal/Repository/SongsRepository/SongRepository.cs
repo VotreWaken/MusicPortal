@@ -19,23 +19,25 @@ namespace MusicPortal.Repository.SongsRepository
 			this._context = context;
 		}
 
-		public async Task AddSong(AudioPath song)
+        public async Task<string> GetImagePath(int imageId)
+        {
+            var image = await _context.ImagePath.FindAsync(imageId);
+
+            if (image != null)
+            {
+                return image.Path;
+            }
+
+            return "";
+        }
+
+        public async Task AddSong(AudioPath song)
 		{
 			await _context.AudioPath.AddAsync(song);
 			_context.SaveChanges();
 		}
 
-		public async Task<string> GetImagePath(int imageId)
-		{
-			var image = await _context.ImagePath.FindAsync(imageId);
 
-			if (image != null)
-			{
-				return image.Path;
-			}
-
-			return "";
-		}
 
 		public async Task<int> SaveImagePath(string path)
 		{

@@ -29,9 +29,9 @@
 
                     <!-- Left Bar Top Options -->
                     <ul>
-                        <li><img src="~/src/img/Home.svg" alt=""><a href="/">Home</a></img></li>
-                        <li><img src="~/src/img/Search.svg" alt=""><a href="search.html">Search</a></img></li>
-                        <li><img src="~/src/img/YourLibrary.svg" alt=""><a href="/">Your Library</a></img></li>
+                        <li><a href="/"><img src="~/src/img/Home.svg" alt="">Home</a></li>
+                        <li><a href="search.html"><img src="~/src/img/Search.svg" alt="">Search</a></li>
+                        <li><a href="/"><img src="~/src/img/YourLibrary.svg" alt="">Your Library</a></li>
                         @if (Context.Session.GetString("Login") != null)
                         {
                             <li><a href="/Songs/Create"><img src="~/src/img/YourLibrary.svg" alt="">Add Audio</a></li>
